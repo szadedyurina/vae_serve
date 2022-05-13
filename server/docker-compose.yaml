@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  redis:
+    image: "redis:7.0.0-alpine"
+  celery:
+    build: .
+    depends_on:
+      - redis
+    volumes:
+      - ./:/sync-folder
+    environment:
+      REDIS_HOST: redis    
+    command: ./start-worker.sh
+  flask:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis   
+    volumes:
+      - ./:/sync-folder
+    environment:
+      REDIS_HOST: redis    
+    command: ./launch-server.sh
