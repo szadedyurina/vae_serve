@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Try to guess the celebrity <img src="../static/Trollface_non-free.png" width="50" height="50" ></h2>
+    <div class="content-container">
+        <img src="data:image/png;base64,{{ image_url }}">
+    </div>
+    <a href="{{ url_for('home') }}">Take me back to the awesome generation page, I want more images!</a>
+{% endblock %}

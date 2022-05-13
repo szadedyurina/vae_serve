@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>It's your chance to explore randomly generated with VAE network celebrity face image!</h2>
+    <div class="content-container">
+        <form action="{{ url_for('image') }}" method="post">
+          <h2>Enter number of generated samples (defaults to 1 if left blank):</h2>
+          <input type="text" class="count-input count mb-3" id="count" name="count">
+          <input class="btn btn-outline-primary" type="submit" value="Submit">
+        </form>
+      </div>
+{% endblock %}

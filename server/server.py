@@ -1,7 +1,7 @@
 import base64
 from celery import Celery
 from celery.result import AsyncResult
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for, redirect
 from io import BytesIO
 import matplotlib.pyplot as plt
 import os
@@ -35,7 +35,7 @@ def sample(size):
         log_img = make_grid(dec_output)
     
     # transform generated tensor into image to be rendered
-    plt.figure(figsize=(3,3))
+    plt.figure(figsize=(3*size,3))
     plt.imshow(log_img.permute(1,2,0))  
     figfile = BytesIO()
     plt.savefig(figfile, format='png')
@@ -44,15 +44,20 @@ def sample(size):
     plt.gcf().clear()
     return plot_url
 
-@app.route('/')
-def hello():
-    return render_template('index.html')
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        return redirect(url_for('image'))
+    return render_template('home.html')
 
-@app.route('/generate')
-def sample_handler():
-    task = sample.delay(1)
+@app.route('/image', methods=['GET', 'POST'])
+def image():
+    count = request.form["count"]
+    print(f'This is the image count {count}')
+    count = int(count) if count else 1
+    task = sample.delay(count)
     plot_url = task.wait()
-    return render_template('index.html', image_url=plot_url)
+    return render_template('image.html', image_url=plot_url)
 
 if __name__ == '__main__':
     app.run("0.0.0.0", 8000)
