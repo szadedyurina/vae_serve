@@ -18,7 +18,7 @@ Open http://localhost:8000/ in your browser and enjoy the ultimate beautiful ugl
 
 <li> Train model
 
-Upload [notebook](https://github.com/zvezdysima/vae_serve/blob/main/vae_celeba.ipynb) to any server with GPU available and gdrive connected and just run all the cells. Generated samples are displayed in the notebooks, as well as model weights saved and LPIPS metric calcualted.
+Upload [notebook](https://github.com/zvezdysima/vae_serve/blob/main/vae_celeba.ipynb) to any server with GPU available and gdrive connected and just run all the cells. Generated samples are displayed in the notebooks, as well as model weights saved and LPIPS metric calculated.
 </ol>
 
 ## Model description
@@ -31,9 +31,10 @@ Model acrhitecture is briefly described in the [notebook](https://github.com/zve
 
 CelebA [dataset](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) is used for training (about 200k images)
 <li> Metrics
-</ul>
 
 [LPIPS](https://torchmetrics.readthedocs.io/en/v0.8.2/image/learned_perceptual_image_patch_similarity.html) metric is used to assess generated images quality 
+
+</ul>
 
 ## Service layout
 
